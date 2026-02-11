@@ -28,11 +28,17 @@ Download the source code or clone the repository to your local machine.
 
 Navigate to the project directory and build the executable:
 
+**Linux/macOS:**
 ```bash
 go build -o task main.go
 ```
 
-This will create an executable file named `task` (or `task.exe` on Windows) in your current directory.
+**Windows (PowerShell/CMD):**
+```powershell
+go build -o task.exe main.go
+```
+
+This will create an executable file named `task` (Linux/macOS) or `task.exe` (Windows) in your current directory.
 
 ### Optional: Add to PATH
 
@@ -57,8 +63,23 @@ export PATH=$PATH:$(pwd)
 
 ### Basic Syntax
 
+**Linux/macOS:**
 ```bash
 task <command> [arguments]
+# or if not in PATH:
+./task <command> [arguments]
+```
+
+**Windows (PowerShell):**
+```powershell
+.\task.exe <command> [arguments]
+# or if added to PATH:
+task <command> [arguments]
+```
+
+**Windows (CMD):**
+```cmd
+task.exe <command> [arguments]
 ```
 
 ### Commands
@@ -67,14 +88,25 @@ task <command> [arguments]
 
 Add a new task to your task list.
 
+**Linux/macOS:**
 ```bash
 task add "task description"
 ```
 
+**Windows (PowerShell):**
+```powershell
+.\task.exe add "task description"
+```
+
 **Example:**
 ```bash
+# Linux/macOS
 task add "Complete project documentation"
 task add "Buy groceries"
+
+# Windows PowerShell
+.\task.exe add "Complete project documentation"
+.\task.exe add "Buy groceries"
 ```
 
 #### 2. Update a Task
@@ -156,6 +188,7 @@ Tasks are automatically saved to a `data.json` file in the same directory as the
 
 ## Example Workflow
 
+**Linux/macOS:**
 ```bash
 # Add some tasks
 task add "Write project proposal"
@@ -181,6 +214,32 @@ task list done
 task delete 3
 ```
 
+**Windows (PowerShell):**
+```powershell
+# Add some tasks
+.\task.exe add "Write project proposal"
+.\task.exe add "Review code changes"
+.\task.exe add "Prepare presentation"
+
+# List all tasks
+.\task.exe list
+
+# Mark a task as in-progress
+.\task.exe mark in-progress 1
+
+# Mark a task as done
+.\task.exe mark done 2
+
+# Update a task description
+.\task.exe update 3 "Prepare and rehearse presentation"
+
+# List only completed tasks
+.\task.exe list done
+
+# Delete a task
+.\task.exe delete 3
+```
+
 ## Task Properties
 
 Each task contains the following information:
@@ -191,6 +250,24 @@ Each task contains the following information:
 - **UpdatedAt**: Timestamp when the task was last modified
 
 ## Troubleshooting
+
+### Windows PowerShell: "The term 'task' is not recognized..."
+
+This is a common Windows PowerShell issue. PowerShell doesn't load commands from the current directory by default.
+
+**Solutions:**
+
+1. **Use `.\task.exe` instead of `task`:**
+   ```powershell
+   .\task.exe list
+   .\task.exe add "My task"
+   ```
+
+2. **Or add to PATH permanently:**
+   - Open System Properties → Environment Variables
+   - Edit the `Path` variable under User or System variables
+   - Add the full path to your task-tracker directory
+   - Restart PowerShell
 
 ### "command not found: task"
 
